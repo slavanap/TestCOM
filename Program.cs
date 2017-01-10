@@ -78,8 +78,7 @@ namespace TestCOM {
     internal class MyService : ServiceBase {
         public MyService() {
             // Initialize COM security
-            Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
-             uint hResult = ComAPI.CoInitializeSecurity(
+            uint hResult = ComAPI.CoInitializeSecurity(
                 IntPtr.Zero, // Add here your Security descriptor
                 -1,
                 IntPtr.Zero,
@@ -94,6 +93,7 @@ namespace TestCOM {
         }
 
         // The main entry point for the process
+        [STAThread]
         static void Main() {
             Run(new ServiceBase[] { new MyService() });
         }
